@@ -293,8 +293,9 @@ impl Inode {
                     diskinode.nlinks-=1;
                 });
                 if inode.get_nlink()==0{
-                    //I have to tell you ,the clear is delete the file,should use inode
-                    //but modify_disk_inode must be used by root_node,which is self
+                    //I have to tell you ,the clear() is delete the file,should use inode
+                    //but modify_disk_inode() must be used by root_node,which is self
+                    //it puzzled me a lot of time
                     inode.clear();
                     self.modify_disk_inode(|root_inode| {
                         let file_count = (root_inode.size as usize) / DIRENT_SZ;
